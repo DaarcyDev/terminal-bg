@@ -1,20 +1,30 @@
 import os
 import cairo
 import gi
+import sys
 gi.require_version('Gtk', '3.0')
 gi.require_version('Vte', '2.91')
 gi.require_version('GtkLayerShell', '0.1')
 from gi.repository import Gtk, Vte, GLib, Gdk, GtkLayerShell
 
 class TerminalBackground(Gtk.Window):
-    def __init__(self, command, opacity, background_color):
+    def __init__(self, command, opacity, background_color, monitor):
         super().__init__(title="TerminalBackground")
 
         GtkLayerShell.init_for_window(self)
         GtkLayerShell.set_layer(self, GtkLayerShell.Layer.BACKGROUND)
         GtkLayerShell.set_namespace(self, "terminal-background")
 
-        GtkLayerShell.set_monitor(self, monitor)
+        # Obtener monitor por índice
+        display = Gdk.Display.get_default()
+        monitor_obj = display.get_monitor(monitor)
+
+        if monitor_obj is None:
+            print(f"❌ Monitor {monitor} no encontrado.")
+            sys.exit(1)
+
+        GtkLayerShell.set_monitor(self, monitor_obj)
+
 
         for edge in [GtkLayerShell.Edge.TOP, GtkLayerShell.Edge.BOTTOM,
                      GtkLayerShell.Edge.LEFT, GtkLayerShell.Edge.RIGHT]:

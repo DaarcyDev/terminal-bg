@@ -4,11 +4,15 @@ Python script that turns your terminal into a transparent, live desktop backgrou
 
 
 ## Preview
-![terminal-bg running cava](terminal-bg-cava.gif)
+### cava
+  ![terminal-bg running cava](terminal-bg-cava.gif)
+
+### lavat
+![terminal-bg running lavat](terminal-bg-lavat.gif)
 
 ## Disclaimer
 
-I’m just a junior programmer who loves Linux. This project was built with help from ChatGPT—apologies if anything is broken or doesn’t work correctly. Use at your own risk!
+I’m just a junior developer who loves Linux. This project was built with help from ChatGPT—apologies if anything is broken or doesn’t work correctly. Use at your own risk!
 
 ---
 
