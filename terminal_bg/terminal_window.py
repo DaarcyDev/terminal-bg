@@ -14,6 +14,8 @@ class TerminalBackground(Gtk.Window):
         GtkLayerShell.set_layer(self, GtkLayerShell.Layer.BACKGROUND)
         GtkLayerShell.set_namespace(self, "terminal-background")
 
+        GtkLayerShell.set_monitor(self, monitor)
+
         for edge in [GtkLayerShell.Edge.TOP, GtkLayerShell.Edge.BOTTOM,
                      GtkLayerShell.Edge.LEFT, GtkLayerShell.Edge.RIGHT]:
             GtkLayerShell.set_anchor(self, edge, True)

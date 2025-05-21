@@ -36,7 +36,7 @@ from gi.repository import Gtk
 def ensure_config_exists():
     """
     Crea el directorio y el archivo de configuración con los valores por defecto
-    si no existen.
+    si no existen..
     """
     config_dir = os.path.dirname(CONFIG_PATH)
     os.makedirs(config_dir, exist_ok=True)
@@ -63,11 +63,12 @@ def main():
 
     # 4) Elegir comando & parámetros
     command = args.script if args.script else config['Behavior']['default_command']
+    monitor = args.monitor if args.monitor is not None else int(config['Behavior']['default_monitor'])
     opacity = config['Appearance']['opacity']
     bg_color = config['Appearance']['background_color']
 
     # 5) Crear la ventana y arrancar GTK
-    win = TerminalBackground(command, opacity, bg_color)
+    win = TerminalBackground(command, opacity, bg_color, monitor)
     win.connect("destroy", Gtk.main_quit)
 
     # 6) Manejador de Ctrl+C para cerrar sin traceback
