@@ -98,3 +98,33 @@ For example:
     
     # Run 'cava' on monitor 1
     terminal-bg --script cava --monitor 1
+
+    # Run 'lavat' on monitor 0
+    terminal-bg --script 'lavat -c red -R 1' --monitor 1
+
+
+---
+
+## Autostart (Run on system startup)
+
+If you want terminal-bg to launch automatically when your system starts (for example, with a window manager like bspwm, i3, or Hyprland), you can add one of the following lines to your autostart configuration file:
+
+  - For bspwm: edit ~/.config/bspwm/bspwmrc
+
+  - For i3: edit ~/.config/i3/config
+
+  - For Hyprland: edit ~/.config/hypr/hyprland.conf
+
+Try them in this order until one works for your setup:
+
+1. **If the binary is in your PATH (installed via pipx):**
+    ```bash
+    exec-once = terminal-bg --script 'cava' --monitor 1
+
+2. **If the command is not found, try with the full path:**
+    ```bash
+    exec-once = /home/your-username/.local/bin/terminal-bg --script 'cava' --monitor 1
+
+3. **If it starts too early before the session is fully ready, try with a delay:**
+    ```bash
+    exec-once = bash -c "sleep 10 && /home/your-username/.local/bin/terminal-bg --script 'cava' --monitor 2"
