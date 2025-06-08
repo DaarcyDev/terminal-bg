@@ -10,6 +10,9 @@ Python script that turns your terminal into a transparent, live desktop backgrou
 ### lavat
 ![terminal-bg running lavat](terminal-bg-lavat.gif)
 
+### Floating Terminals
+![terminal-bg floating](terminal-bg-floating.gif)
+
 ## Disclaimer
 
 I’m just a junior developer who loves Linux. This project was built with help from ChatGPT—apologies if anything is broken or doesn’t work correctly. Use at your own risk!
@@ -20,12 +23,33 @@ I’m just a junior developer who loves Linux. This project was built with help 
 
 - **Transparent terminal background**: Run any CLI program as your live wallpaper.  
 - **Configurable appearance**: Adjust opacity and RGBA background color via a simple config file.  
+- **Floating mode**: Optionally specify position and size for a floating terminal using `--x`, `--y`, `--w`, `--h`.  
+- **Update support**: Use `--update` to run the bundled `update.sh` script and fetch the latest changes.  
 - **Automatic config creation**: First launch auto-generates `~/.config/terminal-bg/terminal-bg.conf` with sane defaults.  
 - **Custom script & monitor support**: Override the default command and target monitor at runtime.  
 - **Lightweight & responsive**: Built on GTK3 + VTE with GtkLayerShell for smooth, accurate layering.  
 - **Multi‑monitor friendly**: Choose which display to use for your animated background.
 
+
 ---
+## Usage
+
+Once installed, you can launch your animated terminal background with:
+
+```bash
+  terminal-bg [OPTIONS]
+
+  --script: Command to run inside the terminal
+
+  --monitor: Select which monitor to use (starts at 0)
+
+  --x, --y, --w, --h: Define position and size for floating terminals (all four must be used)
+
+  --update: Runs the update.sh script (requires Git clone)
+
+  --help: Show full list of available options
+```
+
 
 ## Requirements
 
@@ -102,6 +126,12 @@ For example:
     # Run 'lavat' on monitor 0
     terminal-bg --script 'lavat -c red -R 1' --monitor 1
 
+    # Run 'cava' in floating mode at (x=200, y=100) with size 800x400 on monitor 0
+    terminal-bg --script cava --monitor 0 --x 200 --y 100 --w 800 --h 400
+
+    # Update the local source (only if cloned manually from GitHub)
+    terminal-bg --update
+
 
 ---
 
@@ -128,3 +158,4 @@ Try them in this order until one works for your setup:
 3. **If it starts too early before the session is fully ready, try with a delay:**
     ```bash
     exec-once = bash -c "sleep 10 && /home/your-username/.local/bin/terminal-bg --script 'cava' --monitor 2"
+
